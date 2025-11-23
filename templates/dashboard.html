@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sensor Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial; margin: 20px; background: #f5f5f5; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+        h2 { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Environment Sensor Dashboard</h1>
+
+    <div class="grid">
+        <div class="card">
+            <h2>Temperature</h2>
+            <canvas id="tempChart"></canvas>
+        </div>
+        <div class="card">
+            <h2>Humidity</h2>
+            <canvas id="humChart"></canvas>
+        </div>
+        <div class="card">
+            <h2>Pressure</h2>
+            <canvas id="pressChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const labels = [...Array(10).keys()].map(i => `T${i}`);
+
+        const tempData = {
+            labels: labels,
+            datasets: [{ label: 'Temperature (°C)', data: {{ temp|safe }}, borderWidth: 2 }]
+        };
+        const humData = {
+            labels: labels,
+            datasets: [{ label: 'Humidity (%)', data: {{ hum|safe }}, borderWidth: 2 }]
+        };
+        const pressData = {
+            labels: labels,
+            datasets: [{ label: 'Pressure (hPa)', data: {{ press|safe }}, borderWidth: 2 }]
+        };
+
+        new Chart(document.getElementById('tempChart'), { type: 'line', data: tempData });
+        new Chart(document.getElementById('humChart'), { type: 'line', data: humData });
+        new Chart(document.getElementById('pressChart'), { type: 'line', data: pressData });
+    </script>
+</body>
+</html>
