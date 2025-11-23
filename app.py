@@ -14,7 +14,7 @@ def measurements():
     )
 
     dbcursor = db.cursor(dictionary=True);
-    dbcursor.execute("SELECT * FROM `measurement` ORDER BY timestamp DESC LIMIT 20")
+    dbcursor.execute("SELECT * FROM `measurements` ORDER BY timestamp DESC LIMIT 20")
     records = dbcursor.fetchall()
 
     return jsonify(records)
