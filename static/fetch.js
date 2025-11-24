@@ -1,32 +1,65 @@
+const tempChart = new Chart(document.getElementById('tempChart'), {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{ label: 'Temperature (°C)', data: [], borderWidth: 2 }]
+    }
+});
+
+const humChart = new Chart(document.getElementById('humChart'), {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{ label: 'Humidity (%)', data: [], borderWidth: 2 }]
+    }
+});
+
+const presChart = new Chart(document.getElementById('pressChart'), {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{ label: 'Pressure (hPa)', data: [], borderWidth: 2 }]
+    }
+});
+
 async function fetchMeasurements() {
-	const url = window.location.origin.concat("/measurements")
-	const response = await fetch(url)
-	console.log(await response.json())
+    const fetchInterval = 5000;
+    const url = window.location.origin.concat("/measurements");
 
-	const labels = [...Array(10).keys()].map(i => `T${i}`);
+    try {
+        const response = await fetch(url);
+        const json = await response.json(); // <-- [{temp, hum, pres}, ...]
 
-	const tempData = {
-	    labels: labels,
-	    datasets: [{ label: 'Temperature (°C)', data: [1,2,3,4,5,6,7,8,9], borderWidth: 2 }]
-	}
+        // create labels T0, T1, ...
+        const labels = json.map((_, i) => `T${i}`);
 
-	const humData = {
-	    labels: labels,
-	    datasets: [{ label: 'Humidity (%)', data: [10,11,12,13,14,15,16,17,18,19], borderWidth: 2 }]
-	}
+        // extract values
+        const temps = json.map(m => m.temp);
+        const hums = json.map(m => m.hum);
+        const press = json.map(m => m.pres);
 
-	const pressData = {
-	    labels: labels,
-	    datasets: [{ label: 'Pressure (hPa)', data: [20,21,22,23,24,25,26,27,28,29], borderWidth: 2 }]
-	}
+        // update temp chart
+        tempChart.data.labels = labels;
+        tempChart.data.datasets[0].data = temps;
+        tempChart.update();
 
-	new Chart(document.getElementById('tempChart'), { type: 'line', data: tempData })
-	new Chart(document.getElementById('humChart'), { type: 'line', data: humData })
-	new Chart(document.getElementById('pressChart'), { type: 'line', data: pressData })
+        // update humidity chart
+        humChart.data.labels = labels;
+        humChart.data.datasets[0].data = hums;
+        humChart.update();
+
+        // update pressure chart
+        presChart.data.labels = labels;
+        presChart.data.datasets[0].data = press;
+        presChart.update();
+
+    } catch (err) {
+        console.error("Failed to fetch measurements:", err);
+    }
+
+    setTimeout(fetchMeasurements, fetchInterval);
 }
 
-window.addEventListener('load', function () {
-  const fetchInterval = 5000
-
-  setInterval(fetchMeasurements, fetchInterval)
-})
+window.addEventListener('load', () => {
+    fetchMeasurements();
+});
