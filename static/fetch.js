@@ -4,6 +4,11 @@ const tempChart = new Chart(document.getElementById('tempChart'), {
         labels: [],
         datasets: [{ label: 'Temperature (°C)', data: [], borderWidth: 2 }]
     }
+    options: {
+    	animation: {
+        	duration: 0
+    	}
+		}
 });
 
 const humChart = new Chart(document.getElementById('humChart'), {
@@ -12,6 +17,11 @@ const humChart = new Chart(document.getElementById('humChart'), {
         labels: [],
         datasets: [{ label: 'Humidity (%)', data: [], borderWidth: 2 }]
     }
+		options: {
+    	animation: {
+        	duration: 0
+    	}
+		}
 });
 
 const presChart = new Chart(document.getElementById('pressChart'), {
@@ -20,6 +30,11 @@ const presChart = new Chart(document.getElementById('pressChart'), {
         labels: [],
         datasets: [{ label: 'Pressure (hPa)', data: [], borderWidth: 2 }]
     }
+    options: {
+    	animation: {
+        	duration: 0
+    	}
+		}
 });
 
 async function fetchMeasurements() {
