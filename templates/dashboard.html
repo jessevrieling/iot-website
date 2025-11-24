@@ -28,25 +28,6 @@
         </div>
     </div>
 
-    <script>
-        const labels = [...Array(10).keys()].map(i => `T${i}`);
-
-        const tempData = {
-            labels: labels,
-            datasets: [{ label: 'Temperature (°C)', data: {{ temp|safe }}, borderWidth: 2 }]
-        };
-        const humData = {
-            labels: labels,
-            datasets: [{ label: 'Humidity (%)', data: {{ hum|safe }}, borderWidth: 2 }]
-        };
-        const pressData = {
-            labels: labels,
-            datasets: [{ label: 'Pressure (hPa)', data: {{ press|safe }}, borderWidth: 2 }]
-        };
-
-        new Chart(document.getElementById('tempChart'), { type: 'line', data: tempData });
-        new Chart(document.getElementById('humChart'), { type: 'line', data: humData });
-        new Chart(document.getElementById('pressChart'), { type: 'line', data: pressData });
-    </script>
+    <script type="text/javascript" src="{{url_for('static', filename='fetch.js')}}"></script>
 </body>
 </html>
