@@ -1,3 +1,9 @@
+var limit = document.getElementById("fetch-limit").value;
+
+document.getElementById("apply-button").addEventListener("click", function() {
+  limit = document.getElementById("fetch-limit").value;
+}); 
+
 const tempChart = new Chart(document.getElementById('tempChart'), {
     type: 'line',
     data: {
@@ -32,8 +38,7 @@ const presChart = new Chart(document.getElementById('pressChart'), {
 });
 
 async function fetchMeasurements() {
-		const limit = document.getElementById("fetch-limit").value;
-    const fetchInterval = 5000;
+    const fetchInterval = 1000;
     const url = window.location.origin.concat("/measurements?limit=").concat(limit);
 
     try {
