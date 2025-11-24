@@ -11,7 +11,12 @@ const tempChart = new Chart(document.getElementById('tempChart'), {
         datasets: [{ label: 'Temperature (°C)', data: [], borderWidth: 2 }]
     },
     options: {
-    	animation: false
+    	animation: false,
+    	 	elements: {
+                    point:{
+                        radius: 0
+                    }
+                }
 		}
 });
 
@@ -22,7 +27,12 @@ const humChart = new Chart(document.getElementById('humChart'), {
         datasets: [{ label: 'Humidity (%)', data: [], borderWidth: 2 }]
     },
 		options: {
-    	animation: false
+    	animation: false,
+    	 	elements: {
+                    point:{
+                        radius: 0
+                    }
+                }
 		}
 });
 
@@ -33,7 +43,12 @@ const presChart = new Chart(document.getElementById('pressChart'), {
         datasets: [{ label: 'Pressure (hPa)', data: [], borderWidth: 2 }]
     },
     options: {
-    	animation: false
+    	animation: false,
+    	elements: {
+                    point:{
+                        radius: 0
+                    }
+                }
 		}
 });
 
