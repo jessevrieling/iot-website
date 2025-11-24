@@ -38,8 +38,9 @@ const presChart = new Chart(document.getElementById('pressChart'), {
 });
 
 async function fetchMeasurements() {
+		const limit = document.getElementById("fetch-limit").value;
     const fetchInterval = 5000;
-    const url = window.location.origin.concat("/measurements");
+    const url = window.location.origin.concat("/measurements?limit=").concat(limit);
 
     try {
         const response = await fetch(url);

@@ -6,6 +6,8 @@ app = Flask(__name__)
 
 @app.route("/measurements", methods=["GET"])
 def measurements():
+    limit = request.args.get("limit", default=20, type=int)
+
     db = mysql.connector.connect(
         host="localhost",
         user="root",
@@ -14,7 +16,7 @@ def measurements():
     )
 
     dbcursor = db.cursor(dictionary=True);
-    dbcursor.execute("SELECT * FROM `measurements` ORDER BY timestamp DESC LIMIT 20")
+    dbcursor.execute("SELECT * FROM `measurements` ORDER BY timestamp DESC LIMIT %s", (limit))
     records = dbcursor.fetchall()
 
     return jsonify(records)
