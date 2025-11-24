@@ -3,7 +3,7 @@ const tempChart = new Chart(document.getElementById('tempChart'), {
     data: {
         labels: [],
         datasets: [{ label: 'Temperature (°C)', data: [], borderWidth: 2 }]
-    }
+    },
     options: {
     	animation: false
 		}
@@ -14,7 +14,7 @@ const humChart = new Chart(document.getElementById('humChart'), {
     data: {
         labels: [],
         datasets: [{ label: 'Humidity (%)', data: [], borderWidth: 2 }]
-    }
+    },
 		options: {
     	animation: false
 		}
@@ -25,7 +25,7 @@ const presChart = new Chart(document.getElementById('pressChart'), {
     data: {
         labels: [],
         datasets: [{ label: 'Pressure (hPa)', data: [], borderWidth: 2 }]
-    }
+    },
     options: {
     	animation: false
 		}
