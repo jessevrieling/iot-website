@@ -22,6 +22,22 @@
             <canvas id="pressChart"></canvas>
         </div>
     </div>
+    <div id="gauges" style="display: flex; gap: 30px; margin-top: 20px;">
+    <div>
+        <h3>Temperature</h3>
+        <canvas id="tempGauge" width="200" height="200"></canvas>
+    </div>
+
+    <div>
+        <h3>Humidity</h3>
+        <canvas id="humGauge" width="200" height="200"></canvas>
+    </div>
+
+    <div>
+        <h3>Pressure</h3>
+        <canvas id="presGauge" width="200" height="200"></canvas>
+    </div>
+</div>
     <label for="fetch-limit">Number of records:</label>
     <input type="number" value="20" id="fetch-limit" />
     <button id="apply-button">apply</button>

@@ -52,6 +52,24 @@ const presChart = new Chart(document.getElementById('pressChart'), {
 		}
 });
 
+// Temperature (-20 to 60 °C)
+const tempGauge = new Gauge(document.getElementById('tempGauge')).setOptions(gaugeOptions);
+tempGauge.maxValue = 60;
+tempGauge.setMinValue(-20);
+tempGauge.set(0);
+
+// Humidity (0–100 %)
+const humGauge = new Gauge(document.getElementById('humGauge')).setOptions(gaugeOptions);
+humGauge.maxValue = 100;
+humGauge.setMinValue(0);
+humGauge.set(0);
+
+// Pressure (900–1100 hPa)
+const presGauge = new Gauge(document.getElementById('presGauge')).setOptions(gaugeOptions);
+presGauge.maxValue = 1100;
+presGauge.setMinValue(900);
+presGauge.set(0);
+
 async function fetchMeasurements() {
     const fetchInterval = 1000;
     const url = window.location.origin.concat("/measurements?limit=").concat(limit);
@@ -82,6 +100,14 @@ async function fetchMeasurements() {
         presChart.data.labels = labels;
         presChart.data.datasets[0].data = press;
         presChart.update();
+
+        if (json.length > 0) {
+    const latest = json[json.length - 1];
+
+    tempGauge.set(latest.temp);
+    humGauge.set(latest.hum);
+    presGauge.set(latest.pres);
+}
 
     } catch (err) {
         console.error("Failed to fetch measurements:", err);
