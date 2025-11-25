@@ -52,6 +52,21 @@ const presChart = new Chart(document.getElementById('pressChart'), {
 		}
 });
 
+const gaugeOptions = {
+    angle: 0,
+    lineWidth: 0.25,
+    radiusScale: 1,
+    pointer: {
+        length: 0.6,
+        strokeWidth: 4,
+    },
+    limitMax: false,
+    limitMin: false,
+    colorStart: '#6FADCF',
+    colorStop: '#8FC0DA',
+    strokeColor: '#E0E0E0',
+};
+
 // Temperature (-20 to 60 °C)
 const tempGauge = new Gauge(document.getElementById('tempGauge')).setOptions(gaugeOptions);
 tempGauge.maxValue = 60;
